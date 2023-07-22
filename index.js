@@ -14,11 +14,23 @@ dotenv.config();
 dbConnect();
 
 const app = express();
+
+const corsOptions = {
+  origin:
+    process.env.NODE_ENV === "production"
+      ? process.env.CLIENT
+      : "http://localhost:3000",
+  credentials: true,
+  preflightContinue: true,
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 // app.use(cors());
-app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true
-  }))
+//app.use(cors({
+//    origin: 'http://localhost:3000',
+ //   credentials: true
+ // }))
 app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded ({extended : false}));
