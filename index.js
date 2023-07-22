@@ -1,13 +1,13 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import dbConnect from './config/db.js'
-import userRoutes from './routes/userRoutes.js'
-import guideRoutes from './routes/guideRoutes.js'
-import communityRoutes from './routes/communityRoutes.js'
-import housingRoutes from './routes/housingRoutes.js'
-import serviceProviderRoutes from './routes/serviceProviderRoutes.js'
-import  serviceRequestRoutes from './routes/serviceRequestRoutes.js'
+import dbConnect from './src/config/db.js'
+import userRoutes from './src/routes/userRoutes.js'
+import guideRoutes from './src/routes/guideRoutes.js'
+import communityRoutes from './src/routes/communityRoutes.js'
+import housingRoutes from './src/routes/housingRoutes.js'
+import serviceProviderRoutes from './src/routes/serviceProviderRoutes.js'
+import  serviceRequestRoutes from './src/routes/serviceRequestRoutes.js'
 import cookieParser from "cookie-parser"
 
 dotenv.config();
