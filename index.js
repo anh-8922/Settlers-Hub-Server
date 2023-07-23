@@ -15,6 +15,13 @@ dbConnect();
 
 const app = express();
 
+app.use(
+  cors({
+    origin: "*",
+    preflightContinue: true,
+  })
+);
+
 //const corsOptions = {
 //  origin:
 //    process.env.NODE_ENV === "production"
@@ -26,7 +33,7 @@ const app = express();
 //};
 
 //app.use(cors(corsOptions));
-app.use(cors());
+//app.use(cors());
 //app.use(cors({
 //   origin: 'http://localhost:3000',
  //  credentials: true
