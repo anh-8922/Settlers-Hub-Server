@@ -15,16 +15,16 @@ dbConnect();
 
 const app = express();
 
-//app.use(
-//  cors({
-//    origin: "*",
-//    preflightContinue: true,
-//  })
-//);
-app.use(cors({
-   origin: 'https://settlers-hub-client.vercel.app',
-   credentials: true
- }))
+app.use(
+  cors({
+    origin: "*",
+    preflightContinue: true,
+  })
+);
+//app.use(cors({
+//   origin: 'https://settlers-hub-client.vercel.app',
+//   credentials: true
+// }))
 
 //const corsOptions = {
 //  origin:
