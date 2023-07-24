@@ -9,6 +9,8 @@ import housingRoutes from './src/routes/housingRoutes.js'
 import serviceProviderRoutes from './src/routes/serviceProviderRoutes.js'
 import  serviceRequestRoutes from './src/routes/serviceRequestRoutes.js'
 import cookieParser from "cookie-parser"
+import messageRoutes from './routes/messageRoutes.js'
+import replyRoutes from "./routes/replyRoutes.js"
 
 dotenv.config();
 dbConnect();
@@ -43,9 +45,9 @@ app.use(cors({
 //   origin: 'https://settlers-hub-client.vercel.app',
  //  credentials: true
 //}))
-//app.use(cookieParser())
-//app.use(express.json());
-//app.use(express.urlencoded ({extended : false}));
+app.use(cookieParser())
+app.use(express.json());
+app.use(express.urlencoded ({extended : false}));
 
 
 
@@ -55,6 +57,8 @@ app.use('/community', communityRoutes)
 app.use('/housing', housingRoutes)
 app.use('/serviceprovider', serviceProviderRoutes)
 app.use('/servicerequests', serviceRequestRoutes)
+app.use('/reply', replyRoutes)
+app.use('/message', messageRoutes)
 app.use("/image", express.static("./server/uploads"));
 
 app.use("/uploads", express.static("./server/uploads"))
