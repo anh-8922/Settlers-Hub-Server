@@ -23,7 +23,8 @@ const app = express();
 //);
 app.use(cors({
    origin: 'https://settlers-hub-client.vercel.app',
-   credentials: true
+   credentials: true,
+   preflightContinue: true,
  }))
 
 //const corsOptions = {
