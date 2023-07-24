@@ -22,27 +22,27 @@ const app = express();
 //  })
 //);
 
-app.use(cors({
-    origin: 'https://settlers-hub-client.vercel.app',
-    credentials: true
-  }))
-
-//const corsOptions = {
-//  origin:
-//    process.env.NODE_ENV === "production"
-//      ? process.env.CLIENT
-//      : "http://localhost:3000",
-///  credentials: true,
- // preflightContinue: true,
- // optionsSuccessStatus: 200,
-//};
-
-//app.use(cors(corsOptions));
-//app.use(cors());
 //app.use(cors({
-//   origin: 'http://localhost:3000',
- //  credentials: true
-//}))
+//    origin: 'https://settlers-hub-client.vercel.app',
+ //   credentials: true
+ // }))
+
+const corsOptions = {
+  origin:
+    process.env.NODE_ENV === "production"
+      ? process.env.CLIENT
+      : "https://settlers-hub-client.vercel.app",
+  credentials: true,
+  preflightContinue: true,
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
+app.use(cors());
+app.use(cors({
+   origin: 'https://settlers-hub-client.vercel.app',
+   credentials: true
+}))
 app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded ({extended : false}));
