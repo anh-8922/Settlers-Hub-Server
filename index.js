@@ -9,8 +9,8 @@ import housingRoutes from './src/routes/housingRoutes.js'
 import serviceProviderRoutes from './src/routes/serviceProviderRoutes.js'
 import  serviceRequestRoutes from './src/routes/serviceRequestRoutes.js'
 import cookieParser from "cookie-parser"
-import messageRoutes from './routes/messageRoutes.js'
-import replyRoutes from "./routes/replyRoutes.js"
+import messageRoutes from './src/routes/messageRoutes.js'
+import replyRoutes from "./src/routes/replyRoutes.js"
 
 dotenv.config();
 dbConnect();
