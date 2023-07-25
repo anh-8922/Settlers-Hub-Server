@@ -24,7 +24,7 @@ const app = express();
 //  })
 //);
 app.use(cors({
-   origin: 'https://settlers-hub-client.vercel.app',
+   origin: '*',
    credentials: true,
    preflightContinue: true,
  }))
