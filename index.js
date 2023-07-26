@@ -12,38 +12,19 @@ import cookieParser from "cookie-parser"
 import messageRoutes from './src/routes/messageRoutes.js'
 import replyRoutes from "./src/routes/replyRoutes.js"
 
+
 dotenv.config();
 dbConnect();
 
 const app = express();
 
-//app.use(
-//  cors({
-//    origin: "*",
-//    preflightContinue: true,
-//  })
-//);
 app.use(cors({
-   origin: 'https://settlers-hub-client.vercel.app',
-   credentials: true
+   origin: ['https://client-sh.vercel.app', 'http://localhost:3000', "*"],
+   credentials: true,
+   preflightContinue: true,
+   
  }))
 
-//const corsOptions = {
-//  origin:
-//    process.env.NODE_ENV === "production"
- //     ? process.env.CLIENT
-//      : "https://settlers-hub-client.vercel.app",
-//  credentials: true,
-//  preflightContinue: true,
-//  optionsSuccessStatus: 200,
-//};
-
-//app.use(cors(corsOptions));
-//app.use(cors());
-//app.use(cors({
-//   origin: 'https://settlers-hub-client.vercel.app',
- //  credentials: true
-//}))
 app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded ({extended : false}));
@@ -56,6 +37,18 @@ app.use((req, res, next) => {
     next();
   }
 })
+
+// Define your route handler to set the cookie
+app.get('/set-cookie', (req, res) => {
+  const token = process.env.JWT_SECRET; // Replace this with your actual token value
+  res.cookie('access_token', token, {
+    httpOnly: true,
+    secure: true, // this will enforce https (in production)
+    sameSite: 'none', // change this to 'none' if your client and server are on different domains
+    domain: 'settlers-hub-server.vercel.app',
+  });
+  res.status(200).json({ message: 'Cookie set successfully' });
+});
 
 
 
