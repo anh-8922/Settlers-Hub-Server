@@ -31,6 +31,12 @@ app.use(cors({
    
  }))
 
+ res.cookie('access_token', token, {
+  httpOnly: true,
+  secure: true, // this will enforce https (in production)
+  sameSite: 'none', // change this to 'none' if your client and server are on different domains
+});
+
 //const corsOptions = {
 //  origin:
 //    process.env.NODE_ENV === "production"
