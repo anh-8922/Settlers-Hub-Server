@@ -12,6 +12,7 @@ import cookieParser from "cookie-parser"
 import messageRoutes from './src/routes/messageRoutes.js'
 import replyRoutes from "./src/routes/replyRoutes.js"
 
+
 dotenv.config();
 dbConnect();
 
@@ -31,11 +32,7 @@ app.use(cors({
    
  }))
 
- res.cookie('access_token', token, {
-  httpOnly: true,
-  secure: true, // this will enforce https (in production)
-  sameSite: 'none', // change this to 'none' if your client and server are on different domains
-});
+
 
 //const corsOptions = {
 //  origin:
@@ -65,6 +62,17 @@ app.use((req, res, next) => {
     next();
   }
 })
+
+// Define your route handler to set the cookie
+app.get('/set-cookie', (req, res) => {
+  const token = 'your_token_value'; // Replace this with your actual token value
+  res.cookie('access_token', token, {
+    httpOnly: true,
+    secure: true, // this will enforce https (in production)
+    sameSite: 'none', // change this to 'none' if your client and server are on different domains
+  });
+  res.status(200).json({ message: 'Cookie set successfully' });
+});
 
 
 
