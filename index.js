@@ -46,6 +46,7 @@ app.get('/set-cookie', (req, res) => {
     secure: true, // this will enforce https (in production)
     sameSite: 'none', // change this to 'none' if your client and server are on different domains
     domain: 'settlers-hub-server.vercel.app',
+
   });
   res.status(200).json({ message: 'Cookie set successfully' });
 });
