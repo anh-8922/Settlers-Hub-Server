@@ -136,15 +136,15 @@ app.use('/message', messageRoutes);
 app.use('/image', express.static('./server/uploads'));
 app.use('/uploads', express.static('./server/uploads'));
 
-app.get('/test-cookie', (req, res) => {
-  res.cookie('test_cookie', 'Hello from the server!', {
-    httpOnly: true,
-    secure: true, // Set to true when using HTTPS in production
-    sameSite: 'none', // Change this to 'none' if your client and server are on different domains
-    domain: 'settlers-hub-server.vercel.app', // Make sure this matches the domain of your frontend
-  });
-  res.send('Test route - cookie set!');
-});
+// app.get('/test-cookie', (req, res) => {
+//   res.cookie('test_cookie', 'Hello from the server!', {
+//     httpOnly: true,
+//     secure: true, // Set to true when using HTTPS in production
+//     sameSite: 'none', // Change this to 'none' if your client and server are on different domains
+//     domain: 'settlers-hub-server.vercel.app', // Make sure this matches the domain of your frontend
+//   });
+//   res.send('Test route - cookie set!');
+// });
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server is up and running at port ${port}`));
