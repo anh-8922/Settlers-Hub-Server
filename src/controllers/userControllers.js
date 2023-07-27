@@ -59,9 +59,11 @@ export const handleUserRegister = async (req, res) => {
         return res.send({ success: false, message: "Username or password is incorrect" });
       }
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+      console.log("NODE_ENV:", process.env.NODE_ENV);
       res.cookie("access_token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production" ? true : false, // the cookie will be sent only over HTTPS in production
+        secure: true,
+        // secure: process.env.NODE_ENV === "production" ? true : false, // the cookie will be sent only over HTTPS in production
         sameSite: "none" ,
         // sameSite: "lax", //"none", "strict"
       });
