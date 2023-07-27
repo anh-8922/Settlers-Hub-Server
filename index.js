@@ -1,17 +1,20 @@
-import express from 'express'
-import cors from 'cors'
-import dotenv from 'dotenv'
-import dbConnect from './src/config/db.js'
-import userRoutes from './src/routes/userRoutes.js'
-import guideRoutes from './src/routes/guideRoutes.js'
-import communityRoutes from './src/routes/communityRoutes.js'
-import housingRoutes from './src/routes/housingRoutes.js'
-import serviceProviderRoutes from './src/routes/serviceProviderRoutes.js'
-import  serviceRequestRoutes from './src/routes/serviceRequestRoutes.js'
-import cookieParser from "cookie-parser"
-import messageRoutes from './src/routes/messageRoutes.js'
-import replyRoutes from "./src/routes/replyRoutes.js"
+// External libraries
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 
+// Internal modules
+import dbConnect from './src/config/db.js';
+import auth from './src/middleware/auth.js';
+import userRoutes from './src/routes/userRoutes.js';
+import guideRoutes from './src/routes/guideRoutes.js';
+import communityRoutes from './src/routes/communityRoutes.js';
+import housingRoutes from './src/routes/housingRoutes.js';
+import serviceProviderRoutes from './src/routes/serviceProviderRoutes.js';
+import serviceRequestRoutes from './src/routes/serviceRequestRoutes.js';
+import messageRoutes from './src/routes/messageRoutes.js';
+import replyRoutes from './src/routes/replyRoutes.js';
 
 dotenv.config();
 dbConnect();
@@ -67,7 +70,12 @@ app.use(express.urlencoded ({extended : false}));
 //   res.status(200).json({ message: 'Cookie set successfully' });
 // });
 
-
+// Apply the auth middleware to routes that require authentication
+app.get("/protected-route", auth, (req, res) => {
+  // If the control reaches here, it means the user is authenticated
+  // You can access the user ID using req.user
+  // Your protected route logic goes here
+});
 
 app.use('/guide', guideRoutes)
 app.use('/user', userRoutes)
