@@ -21,23 +21,24 @@ dbConnect();
 
 const app = express();
 
-const corsOptions = {
-  origin:"*",
-    // process.env.NODE_ENV === "production"
-    //   ? 'https://client-sh.vercel.app'
-    //   : "http://localhost:3000",
-  credentials: true,
-  preflightContinue: true,
-  optionsSuccessStatus: 200,
-};
-app.use(cors(corsOptions))
+// const corsOptions = {
+//   origin:
+//   "*",
+//     process.env.NODE_ENV === "production"
+//       ? 'https://client-sh.vercel.app'
+//       : "http://localhost:3000",
+//   credentials: true,
+//   preflightContinue: true,
+//   optionsSuccessStatus: 200,
+// };
+// app.use(cors(corsOptions))
 
-// app.use(cors({
-//    origin: ['https://client-sh.vercel.app', 'http://localhost:3000', "*"],
-//    credentials: true,
-//    preflightContinue: true,
+app.use(cors({
+   origin: ['https://client-sh.vercel.app', 'http://localhost:3000', "*"],
+   credentials: true,
+   preflightContinue: true,
    
-//  }))
+ }))
 
 app.use(cookieParser())
 app.use(express.json());
