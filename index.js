@@ -19,10 +19,10 @@ dbConnect();
 const app = express();
 
 const corsOptions = {
-  origin:
-    process.env.NODE_ENV === "production"
-      ? 'https://client-sh.vercel.app'
-      : "http://localhost:3000",
+  origin:"*",
+    // process.env.NODE_ENV === "production"
+    //   ? 'https://client-sh.vercel.app'
+    //   : "http://localhost:3000",
   credentials: true,
   preflightContinue: true,
   optionsSuccessStatus: 200,
