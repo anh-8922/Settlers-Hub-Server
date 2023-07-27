@@ -21,38 +21,53 @@ dbConnect();
 
 const app = express();
 
-app.use(cors({
-   origin: ['https://client-sh.vercel.app', 'http://localhost:3000', "*"],
-   credentials: true,
-   preflightContinue: true,
+const corsOptions = {
+  origin:
+    process.env.NODE_ENV === "production"
+      ? 'https://client-sh.vercel.app'
+      : "http://localhost:3000",
+  credentials: true,
+  preflightContinue: true,
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions))
+
+// app.use(cors({
+//    origin: ['https://client-sh.vercel.app', 'http://localhost:3000', "*"],
+//    credentials: true,
+//    preflightContinue: true,
    
- }))
+//  }))
 
 app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded ({extended : false}));
 
-app.use((req, res, next) => {
-  if (req.method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.status(200).json({});
-  } else {
-    next();
-  }
-})
+// app.use((req, res, next) => {
+//   if (req.method === 'OPTIONS') {
+//     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//     res.status(200).json({});
+//   } else {
+//     next();
+//   }
+// })
 
-// Define your route handler to set the cookie
-app.get('/set-cookie', (req, res) => {
-  const token = process.env.JWT_SECRET; // Replace this with your actual token value
-  res.cookie('access_token', token, {
-    httpOnly: true,
-    secure: true, // this will enforce https (in production)
-    sameSite: 'none', // change this to 'none' if your client and server are on different domains
-    domain: 'settlers-hub-server.vercel.app',
+// app.use((req, res, next) => {
+//   console.log('Request Headers:', req.headers);
+//   next();
+// })
+// // Define your route handler to set the cookie
+// app.get('/set-cookie', (req, res) => {
+//   const token = process.env.JWT_SECRET; // Replace this with your actual token value
+//   res.cookie('access_token', token, {
+//     httpOnly: true,
+//     secure: true, // this will enforce https (in production)
+//     sameSite: 'none', // change this to 'none' if your client and server are on different domains
+//     domain: 'settlers-hub-server.vercel.app',
 
-  });
-  res.status(200).json({ message: 'Cookie set successfully' });
-});
+//   });
+//   res.status(200).json({ message: 'Cookie set successfully' });
+// });
 
 // Apply the auth middleware to routes that require authentication
 app.get("/protected-route", auth, (req, res) => {

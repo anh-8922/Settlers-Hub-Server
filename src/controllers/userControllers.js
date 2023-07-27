@@ -43,7 +43,7 @@ export const handleUserRegister = async (req, res) => {
     try {
       const { username, password } = req.body;
       console.log("password:", password)
-      if (!username || !password) return res.send({ success: false, error:"Both filed must be filled" });
+      if (!username || !password) return res.send({ success: false, error:"Both fileds must be filled" });
   
       const user = await User.findOne({ username });
       console.log('user:', user)
@@ -58,8 +58,16 @@ export const handleUserRegister = async (req, res) => {
       if (!isPasswordValid) {
         return res.send({ success: false, message: "Username or password is incorrect" });
       }
-  
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+      res.cookie("access_token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production" ? true : false, // the cookie will be sent only over HTTPS in production
+        sameSite: "none" ,
+        // sameSite: "lax", //"none", "strict"
+      });
+  
+     
+      
   
       // res.json({token, userID: user._id });
       res.send({success: true, token, userID: user._id })
