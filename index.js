@@ -119,6 +119,8 @@ const app = express();
 app.use(cors({
   origin: ['https://client-sh.vercel.app', 'http://localhost:3000'],
   credentials: true,
+  preflightContinue: true,
+  optionsSuccessStatus: 200,
 }));
 
 app.use(cookieParser());
